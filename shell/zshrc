@@ -1,8 +1,6 @@
 export ZSH=/Users/z00335s/.oh-my-zsh
 ZSH_THEME="bira"
-plugins=(
-  git
-)
+plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 alias mp3dl="cd /Users/z00335s/Google\ Drive/Music/ && youtube-dl --extract-audio --audio-format mp3"
