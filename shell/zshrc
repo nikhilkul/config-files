@@ -1,14 +1,46 @@
+# ZSH 
 export ZSH=/Users/z00335s/.oh-my-zsh
 ZSH_THEME="bira"
 plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
-alias mp3dl="cd /Users/z00335s/Google\ Drive/Music/ && youtube-dl --extract-audio --audio-format mp3"
+# Download MP3 files from Youtube Videos
+alias mp3dl="cd /Users/z00335s/Google\ Drive/Music/ &&\
+ youtube-dl --extract-audio --audio-format mp3 --youtube-skip-dash-manifest --audio-quality 0 --embed-thumbnail \
+ --add-metadata --metadata-from-title '%(title)s | %(artist)s' --continue --ignore-errors"
+
+# Jupyter Notebook
 alias jupyn="jupyter notebook >/dev/null 2>&1 &"
+
+# Python virtualenv
+#export WORKON_HOME=$HOME/.virtualenvs
+#export PROJECT_HOME=$HOME/Devel
+#export VIRTUALENVWRAPPER_PYTHON="$(which python3)"
+#source /usr/local/bin/virtualenvwrapper.sh
+
+# Misc
+alias watch='watch '
+
+# Docker Aliases
 alias ds="docker ps -a"
 alias di="docker images"
 
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/Devel
-source /usr/local/bin/virtualenvwrapper.sh
-export PYTHONPATH=:.
+# Kubernetes Aliases
+alias pods="watch kubectl get pods" 
+alias logs="kubectl logs -f"
+
+# kubernetes Namespace Aliases
+alias kct="~/gitdir/devops/bin/kubectl.sh"
+alias nlogs="~/gitdir/devops/bin/kubectl.sh logs -f"
+alias npods="watch ~/gitdir/devops/bin/kubectl.sh get pods" 
+alias ndele="kct get pods | grep Evicted | awk '{print $1}' | xargs /Users/z00335s/gitdir/devops/bin/kubectl.sh delete pod"
+
+# Target set-context
+alias testpods="export KUBE_CONTEXT=edabi-search-test-gcp-central1-bigoli-test;/Users/z00335s/gitdir/devops/bin/kubectl.sh login;npods"
+alias aashishpods="export KUBE_CONTEXT=edabi-search-aashish-gcp-central1-bigoli-test;npods"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/z00335s/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/z00335s/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/z00335s/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/z00335s/google-cloud-sdk/completion.zsh.inc'; fi
